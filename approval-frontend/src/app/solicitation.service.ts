@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Solicitation } from './solicitation';
 
@@ -9,19 +9,19 @@ import { Solicitation } from './solicitation';
 export class SolicitationService {
 
   private baseUrl = 'http://localhost:8080/approvalApi/solicitations';
-  
+
   constructor(private http: HttpClient) { }
 
-  
+
   getSolicitationsList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/get`);
   }
 
   getSolicitation(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/get/${id}`);
-  } 
+  }
 
-  createSolicitation(solicitation: Object): Observable<Object> {
+  createSolicitation(solicitation: Solicitation): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, solicitation);
   }
 

@@ -10,5 +10,6 @@ export class Solicitation {
 
     constructor(){
         this.status = Status.PENDING;
+        this.observation = "";
     }
 }

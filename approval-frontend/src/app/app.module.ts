@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CreateSolicitationComponent } from './create-solicitation/create-solicitation.component';
 import { SolicitationListComponent } from './solicitation-list/solicitation-list.component';
+import { ApproveSolicitationComponent } from './approve-solicitation/approve-solicitation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateSolicitationComponent,
-    SolicitationListComponent
+    SolicitationListComponent,
+    ApproveSolicitationComponent
   ],
   imports: [
     BrowserModule,

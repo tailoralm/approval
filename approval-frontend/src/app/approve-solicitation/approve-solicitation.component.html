@@ -1,0 +1,35 @@
+<div style="width: 400px;">    
+    <form (ngSubmit)="updateSolicitation()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" ng-readonly="true" required [(ngModel)]="solicitationToEdit.name" name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Description</label>
+        <input type="text" class="form-control" id="description" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.description" name="description">
+    </div>
+    
+    <div class="form-group">
+        <label for="name">Price</label>
+        <input type="number" class="form-control" id="price" step="0.01" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.price" name="price">
+    
+    </div>
+
+    <div class="form-group">
+        <label for="name">Observation</label>
+        <input type="text" class="form-control" id="observation" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.observation" name="observation">
+    </div>      
+
+    <div class="form-group">
+      <label for="name">Status</label>
+      <select class="form-control" ng-readonly="!pendingSolicitation()" (change)="changeOption($event.target.value)">
+        <option value="Status.Approved" selected>Approved</option>
+        <option value="Status.Rejected">Rejected</option>
+      </select>
+    </div>
+
+      <button (click)="closeEdit()" class="btn btn-danger">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>

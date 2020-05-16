@@ -14,8 +14,8 @@ export class SolicitationListComponent implements OnInit {
 
   solicitations: Observable<Solicitation[]>;
 
-  constructor (private solicitationService: SolicitationService,
-    private router: Router){}
+  constructor(private solicitationService: SolicitationService,
+              private router: Router){}
 
   ngOnInit(){
     this.reloadData();
@@ -25,20 +25,13 @@ export class SolicitationListComponent implements OnInit {
     this.solicitations = this.solicitationService.getSolicitationsList();
   }
 
-  solicitationDetails(id: number){
-    this.router.navigate(['details', id]);
+  selectToEdit(id: number){
+    // this.router.navigate(['/approve', { id }]);
   }
 
-  updateSolicitation(solicitation: Solicitation, approved: boolean){
-    if(approved)
-      solicitation.status = Status.APPROVED;
-     else
-      solicitation.status = Status.REJECTED;
-
-    this.solicitationService.updateSolicitation(solicitation)
-    .subscribe(data => console.log(data), error => console.log(error));
-
-    this.reloadData();
+  pendingStatus(status: Status): boolean{
+    return status === Status.PENDING;
   }
+
 
 }
