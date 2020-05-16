@@ -22,37 +22,34 @@ import com.tailoralm.approval.model.Status;
 import com.tailoralm.approval.repository.SolicitationRepository;
 
 @RestController @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1")
+@RequestMapping("/solicitations")
 public class SolicitationController {
 
     @Autowired
     private SolicitationRepository solicitationRepository;
 
-    @GetMapping("/solicitations")
+    @GetMapping("/get")
     public List<Solicitation> getAllSolicitations(){
         return solicitationRepository.findAll();
     }
 
-    @GetMapping("/solicitations/{id}")
-    public ResponseEntity<Solicitation> getSolicitationById(@PathVariable(value = "id") Long solicitationId) throws ResourceNotFoundException{
-    	Solicitation solicitation = solicitationRepository.findById(solicitationId).orElseThrow(() -> new ResourceNotFoundException("Solicitação de id "+solicitationId+" não encontrada"));
-
-    	return ResponseEntity.ok().body(solicitation);
+    @GetMapping("/get/{id}")
+    public Solicitation getSolicitationById(@PathVariable(value = "id") Long solicitationId) throws ResourceNotFoundException{
+    	return solicitationRepository.findById(solicitationId).orElseThrow(() -> new ResourceNotFoundException("Solicitação de id "+solicitationId+" não encontrada"));
     	
     }
 
-    @PostMapping("/solicitations")
+    @PostMapping()
     public Solicitation createSolicitation(@Valid @RequestBody Solicitation solicitation) {
     	return solicitationRepository.save(solicitation);
     }
     
-    @PutMapping("/solicitations/{id}")
-    public ResponseEntity<Solicitation> updateSolicitation(@PathVariable(value = "id") Long solicitationId, @Valid @RequestBody Solicitation solicitationDetails) throws ResourceNotFoundException {
-    	Solicitation solicitation = solicitationRepository.findById(solicitationId).orElseThrow(() -> new ResourceNotFoundException("Solicitação de id "+solicitationId+" não encontrada"));
+    @PutMapping("/{id}")
+    public Solicitation updateSolicitation(@PathVariable(value = "id") Long solicitationId, @RequestBody Solicitation solicitation) throws ResourceNotFoundException {
+    	Solicitation solicitationBd = getSolicitationById(solicitationId);    	
+    	solicitationBd.setStatus(solicitation.getStatus());
+    	solicitationBd.setObservation(solicitation.getObservation());	
     	
-    	solicitation.setStatus(Status.REJECTED);
-    	
-    	final Solicitation updatedSolicitation = solicitationRepository.save(solicitation);
-        return ResponseEntity.ok(updatedSolicitation);
+        return solicitationRepository.save(solicitation);
     }
 }
