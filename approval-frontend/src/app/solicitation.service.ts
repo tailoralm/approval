@@ -13,12 +13,32 @@ export class SolicitationService {
   constructor(private http: HttpClient) { }
 
 
-  getSolicitationsList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/get`);
+  getSolicitationsList(): Observable<Solicitation[]> {
+    return this.http.get<Solicitation[]>(`${this.baseUrl}/get`);
   }
 
-  getSolicitation(id: number): Observable<any> {
+  getSolicitationById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/get/${id}`);
+  }
+
+  getSolicitationByName(name: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get/name/${name}`);
+  }
+
+  getSolicitationByDesc(desc: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get/desc/${desc}`);
+  }
+
+  getApprovedSolicitations(): Observable<Solicitation[]> {
+    return this.http.get<Solicitation[]>(`${this.baseUrl}/get/approved`);
+  }
+
+  getRejectedSolicitations(): Observable<Solicitation[]> {
+    return this.http.get<Solicitation[]>(`${this.baseUrl}/get/rejected`);
+  }
+
+  getPendingSolicitations(): Observable<Solicitation[]> {
+    return this.http.get<Solicitation[]>(`${this.baseUrl}/get/pending`);
   }
 
   createSolicitation(solicitation: Solicitation): Observable<Object> {

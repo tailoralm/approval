@@ -9,7 +9,7 @@ export class Solicitation {
     observation: string;
 
     constructor(){
-        this.status = Status.PENDING;
-        this.observation = "";
+        this.status = Status.PENDENTE;
+        this.observation = '';
     }
 }

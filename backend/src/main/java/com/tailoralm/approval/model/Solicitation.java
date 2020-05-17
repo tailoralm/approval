@@ -29,7 +29,7 @@ public class Solicitation {
         this.name = "";
         this.description = "";
         this.price = 0;
-        this.status = Status.PENDING;
+        this.status = Status.PENDENTE;
         this.observation = "";
     }
 
@@ -37,7 +37,7 @@ public class Solicitation {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.status = Status.PENDING;
+        this.status = Status.PENDENTE;
         this.observation = observation;
     }
 

@@ -1,5 +1,5 @@
 package com.tailoralm.approval.model;
 
 public enum Status {
-    APPROVED, PENDING, REJECTED;
+    APROVADO, PENDENTE, REJEITADO;
 }

@@ -12,30 +12,28 @@ import { Status } from '../status';
 export class ApproveSolicitationComponent implements OnInit {
 
   solicitationToEdit: Solicitation = new Solicitation();
+  situation: Status = Status.APROVADO;
 
   constructor(private solicitationService: SolicitationService,
               private route: ActivatedRoute,
               private router: Router){ }
 
   ngOnInit(): void {
-    this.route.snapshot.paramMap.get('id');
-    // this.solicitationService.getSolicitationById(id).subscribe(solicitation => this.solicitationToEdit = solicitation);
+    this.solicitationService.getSolicitationById(this.route.snapshot.paramMap.get('id'))
+    .subscribe(solicitation => this.solicitationToEdit = solicitation);
   }
 
 
   closeEdit(){
-
+    this.router.navigate(["/solicitations"]);
   }
 
-  pendingSolicitation(): boolean{
-    return this.solicitationToEdit.status === Status.PENDING;
-  }
-
-  changeOption(status: Status) {
-    this.solicitationToEdit.status === status;
+  changeOption(situation: Status) {
+    this.situation = situation;
   }
 
   updateSolicitation(){
+    this.solicitationToEdit.status = this.situation;
     this.solicitationService.updateSolicitation(this.solicitationToEdit)
     .subscribe(data => this.onReturn(data), error => console.log(error));
   }
@@ -43,6 +41,10 @@ export class ApproveSolicitationComponent implements OnInit {
   onReturn(data: Object){
     console.log(data);
     this.closeEdit();
+  }
+
+  pendingStatus(status: Status): boolean{
+    return status === Status.PENDENTE;
   }
 
 }

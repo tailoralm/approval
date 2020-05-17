@@ -13,6 +13,8 @@ import { Status } from '../status';
 export class SolicitationListComponent implements OnInit {
 
   solicitations: Observable<Solicitation[]>;
+  nameToSearch = '';
+  descToSearch = '';
 
   constructor(private solicitationService: SolicitationService,
               private router: Router){}
@@ -25,12 +27,38 @@ export class SolicitationListComponent implements OnInit {
     this.solicitations = this.solicitationService.getSolicitationsList();
   }
 
-  selectToEdit(id: number){
-    // this.router.navigate(['/approve', { id }]);
+  getApprovedList() {
+    this.solicitations = this.solicitationService.getApprovedSolicitations();
+  }
+
+  getRejectedList() {
+    this.solicitations = this.solicitationService.getRejectedSolicitations();
+  }
+
+  getPendingList() {
+    this.solicitations = this.solicitationService.getPendingSolicitations();
+  }
+
+  getSolicitationsByName() {
+    if (this.nameToSearch !== ''){
+      this.solicitations = this.solicitationService.getSolicitationByName(this.nameToSearch);
+      this.descToSearch = '';
+    } else {
+      this.reloadData();
+    }
+  }
+
+  getSolicitationsByDesc() {
+    if (this.descToSearch !== ''){
+      this.solicitations = this.solicitationService.getSolicitationByDesc(this.descToSearch);
+      this.nameToSearch = '';
+    } else {
+      this.reloadData();
+    }
   }
 
   pendingStatus(status: Status): boolean{
-    return status === Status.PENDING;
+    return status === Status.PENDENTE;
   }
 
 

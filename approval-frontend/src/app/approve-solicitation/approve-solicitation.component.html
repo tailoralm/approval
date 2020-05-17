@@ -1,35 +1,34 @@
-<div style="width: 400px;">    
-    <form (ngSubmit)="updateSolicitation()">
+<div style="width: 400px;">
+    <form (ngSubmit)="f.form.valid && updateSolicitation()" #f="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" ng-readonly="true" required [(ngModel)]="solicitationToEdit.name" name="name">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" readonly required [(ngModel)]="solicitationToEdit.name" name="name">
       </div>
 
       <div class="form-group">
-        <label for="name">Description</label>
-        <input type="text" class="form-control" id="description" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.description" name="description">
-    </div>
-    
-    <div class="form-group">
-        <label for="name">Price</label>
-        <input type="number" class="form-control" id="price" step="0.01" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.price" name="price">
-    
+        <label for="name">Descrição</label>
+        <input type="text" class="form-control" id="description" readonly required [(ngModel)]="solicitationToEdit.description" name="description">
     </div>
 
     <div class="form-group">
-        <label for="name">Observation</label>
-        <input type="text" class="form-control" id="observation" ng-readonly="!pendingSolicitation()" required [(ngModel)]="solicitationToEdit.observation" name="observation">
-    </div>      
+        <label for="name">Preço</label>
+        <input type="number" class="form-control" id="price" step="0.01" readonly required [(ngModel)]="solicitationToEdit.price" name="price">
+    </div>
 
     <div class="form-group">
-      <label for="name">Status</label>
-      <select class="form-control" ng-readonly="!pendingSolicitation()" (change)="changeOption($event.target.value)">
-        <option value="Status.Approved" selected>Approved</option>
-        <option value="Status.Rejected">Rejected</option>
+        <label for="name">Observação</label>
+        <input type="text" class="form-control" id="observation" required [(ngModel)]="solicitationToEdit.observation" name="observation">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Situação</label>
+      <select class="form-control" (change)="changeOption($event.target.value)">
+        <option value="APROVADO">Aprovada</option>
+        <option value="REJEITADO">Rejeitada</option>
       </select>
     </div>
 
-      <button (click)="closeEdit()" class="btn btn-danger">Cancel</button>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button (click)="closeEdit()" class="btn btn-danger">Cancelar</button>
+      <span [hidden]="!pendingStatus(solicitationToEdit.status)"><button type="submit" class="btn btn-success">Salvar</button></span>
     </form>
   </div>
