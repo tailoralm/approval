@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Lista de solicitações</h2>
+      <div class="row inputFilter">
+        <div class="col-md-12 col-lg-6">
+          <button (click)="reloadData()" class="btn btn-info filterBtn">Todas</button>
+          <button (click)="getPendingList()" class="btn btn-primary filterBtn">Pendentes</button>
+          <button (click)="getApprovedList()" class="btn btn-success filterBtn">Aprovadas</button>
+          <button (click)="getRejectedList()" class="btn btn-danger filterBtn">Rejeitadas</button>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="nameToSearch" (ngModelChange)="getSolicitationsByName()" placeholder="Nome">
+            <input type="text" class="form-control" [(ngModel)]="descToSearch" (ngModelChange)="getSolicitationsByDesc()" placeholder="Descrição">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped tableList">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th class="obsClass">Observação</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let solicitation of solicitations | async">
+            <td>{{solicitation.name}}</td>
+            <td>{{solicitation.description}}</td>
+            <td>{{solicitation.price | currency: 'R$ '}}</td>
+            <td class="obsClass">{{solicitation.observation}}</td>
+            <td>
+              <a routerLink="approve/{{solicitation.id}}" [hidden]="!pendingStatus(solicitation.status)"><button type="button" class="btn btn-primary detailsButton">Detalhes</button></a>
+              <span [hidden]="pendingStatus(solicitation.status)">{{solicitation.status}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

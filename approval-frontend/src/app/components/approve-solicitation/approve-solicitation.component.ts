@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SolicitationService } from '../solicitation.service';
-import { Solicitation } from '../solicitation';
-import { Status } from '../status';
+import { SolicitationService } from 'src/app/services/solicitation.service';
+import { Solicitation } from 'src/app/models/solicitation';
+import { Status } from 'src/app/models/status';
 
 @Component({
   selector: 'app-approve-solicitation',

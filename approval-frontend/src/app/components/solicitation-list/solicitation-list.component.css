@@ -1,0 +1,30 @@
+.filterBtn{
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.inputFilter{
+  margin-bottom: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .obsClass{
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  th{
+    font-size: 1em;
+  }
+
+  td{
+    font-size: 0.8em;
+  }
+  .detailsButton{
+    font-size: 1.2em;
+    padding: .2em;
+  }
+
+}

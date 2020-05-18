@@ -1,4 +1,4 @@
-<div style="width: 400px;">
+<div>
     <form (ngSubmit)="f.form.valid && updateSolicitation()" #f="ngForm">
       <div class="form-group">
         <label for="name">Nome</label>
@@ -17,7 +17,10 @@
 
     <div class="form-group">
         <label for="name">Observação</label>
-        <input type="text" class="form-control" id="observation" required [(ngModel)]="solicitationToEdit.observation" name="observation">
+        <input type="text" class="form-control" id="observation" required [(ngModel)]="solicitationToEdit.observation" name="observation" #obs="ngModel">
+        <div *ngIf="f.submitted && obs.invalid" class="alert alert-danger">
+          <div *ngIf="obs.errors.required">O campo "Observação" é obrigatório. </div>
+        </div>
     </div>
 
     <div class="form-group">
@@ -27,8 +30,7 @@
         <option value="REJEITADO">Rejeitada</option>
       </select>
     </div>
-
-      <button (click)="closeEdit()" class="btn btn-danger">Cancelar</button>
-      <span [hidden]="!pendingStatus(solicitationToEdit.status)"><button type="submit" class="btn btn-success">Salvar</button></span>
+      <span [hidden]="!pendingStatus(solicitationToEdit.status)"><button type="submit" class="btn btn-success commandButtons float-right">Salvar</button></span>
+      <button (click)="closeEdit()" class="btn btn-danger float-right commandButtons">Cancelar</button>
     </form>
   </div>

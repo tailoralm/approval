@@ -6,9 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { AppComponent } from './app.component';
-import { CreateSolicitationComponent } from './create-solicitation/create-solicitation.component';
-import { SolicitationListComponent } from './solicitation-list/solicitation-list.component';
-import { ApproveSolicitationComponent } from './approve-solicitation/approve-solicitation.component';
+import { CreateSolicitationComponent } from './components/create-solicitation/create-solicitation.component';
+import { SolicitationListComponent } from './components/solicitation-list/solicitation-list.component';
+import { ApproveSolicitationComponent } from './components/approve-solicitation/approve-solicitation.component';
 
 @NgModule({
   declarations: [
