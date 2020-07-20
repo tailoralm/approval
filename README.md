@@ -1,4 +1,5 @@
 # Fluxo de aprovação - Approval Flow
+CRUD de um fluxo de aprovação criado para aprendizado de Angular. Foi utilizado também MySQL e Java(Spring JPA e Spring Web).
 
 ## Pré-Requisitos
 - Instale as seguintes tecnologias:
